@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chúc mừng 20/10 💖</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --primary:#ff4d6d;
+      --accent:#ff9bd1;
+      --glow:#ffd1e8;
+      --text:#f7f7ff;
+      --soft:#b0b7d1;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 70% 20%, #172038 0%, #0f1628 40%, var(--bg) 70%);
+      color:var(--text);
+      overflow:hidden; /* để nền tim bay không kéo scroll */
+    }
+
+    /* Lớp tim bay phía sau */
+    .heart-field{
+      position:fixed; inset:0; pointer-events:none; z-index:0;
+      filter: drop-shadow(0 0 6px rgba(255,77,109,.35));
+    }
+    .heart{
+      position:absolute;
+      width:14px; height:14px;
+      transform:rotate(45deg);
+      opacity:0;
+      animation: rise linear forwards;
+    }
+    .heart:before, .heart:after{
+      content:"";
+      position:absolute;
+      width:14px; height:14px;
+      background: currentColor;
+      border-radius:50%;
+      top:-7px; left:0;
+    }
+    .heart:after{ left:-7px; top:0; }
+
+    @keyframes rise{
+      0%{ transform:translateY(0) rotate(45deg) scale(.6); opacity:0 }
+      10%{ opacity:.9 }
+      90%{ opacity:.9 }
+      100%{ transform:translateY(-110vh) rotate(45deg) scale(1.2); opacity:0 }
+    }
+
+    /* Khung nội dung */
+    .wrap{
+      position:relative;
+      z-index:2;
+      display:grid;
+      place-items:center;
+      min-height:100dvh;
+      padding:24px;
+    }
+    .card{
+      width:min(920px, 92vw);
+      background: rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      padding:28px clamp(22px, 4vw, 42px);
+      box-shadow: 0 20px 60px rgba(0,0,0,.35), inset 0 0 50px rgba(255,255,255,.03);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Dòng tiêu đề phát sáng */
+    .title{
+      font-weight:800;
+      font-size: clamp(28px, 4.5vw, 56px);
+      line-height:1.1;
+      text-align:center;
+      margin:6px 0 18px;
+      letter-spacing:.5px;
+      background: linear-gradient(90deg, #ffd1e8, #ff7aa2, #ffd1e8);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      filter: drop-shadow(0 0 12px rgba(255,160,200,.35));
+      animation: shimmer 4.5s linear infinite;
+    }
+    @keyframes shimmer{
+      0%{background-position:0% 50%}
+      100%{background-position:200% 50%}
+    }
+
+    /* Dòng phụ gợn sóng */
+    .subtitle{
+      font-size: clamp(16px, 2.3vw, 22px);
+      text-align:center;
+      color: var(--soft);
+      margin-bottom: 22px;
+      animation: wave 3.6s ease-in-out infinite;
+    }
+    @keyframes wave{
+      0%,100%{ transform: translateY(0) }
+      50%{ transform: translateY(-4px) }
+    }
+
+    /* Đoạn lời chúc kiểu gõ chữ */
+    .typewriter{
+      position:relative;
+      font-size: clamp(18px, 2.6vw, 24px);
+      line-height:1.6;
+      padding: 16px 18px;
+      border-radius:18px;
+      background: rgba(255,255,255,.04);
+      border:1px dashed rgba(255,255,255,.18);
+      overflow:hidden;
+    }
+    .typewriter .cursor{
+      display:inline-block;
+      width:10px; height:1.2em;
+      transform: translateY(4px);
+      margin-left:4px;
+      background: var(--glow);
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink{
+      0%,49%{opacity:1}
+      50%,100%{opacity:0}
+    }
+
+    /* Hàng nút & chip tim */
+    .actions{
+      display:flex; flex-wrap:wrap; gap:12px;
+      justify-content:center; margin-top:22px;
+    }
+    .btn{
+      cursor:pointer;
+      border:none;
+      padding:12px 18px;
+      border-radius:999px;
+      background: linear-gradient(135deg, var(--primary), #ff7aa2);
+      color:white; font-weight:700; font-size:16px;
+      box-shadow: 0 10px 30px rgba(255,77,109,.35);
+      transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .btn:hover{ transform: translateY(-2px); filter:brightness(1.05) }
+    .btn:active{ transform: translateY(1px) }
+
+    .chip{
+      user-select:none;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      font-weight:600;
+      display:inline-flex; align-items:center; gap:8px;
+      transition: transform .15s ease;
+    }
+    .chip:hover{ transform: translateY(-2px) }
+    .chip .bump{
+      display:inline-block;
+      animation: bump 1.4s ease-in-out infinite;
+      transform-origin: bottom center;
+    }
+    @keyframes bump{
+      0%,100%{ transform: scale(1) }
+      30%{ transform: scale(1.25) }
+      60%{ transform: scale(.95) }
+    }
+
+    /* Pháo giấy tim nổ nhẹ */
+    .burst{
+      position:absolute; inset:0; pointer-events:none; z-index:3;
+    }
+    .particle{
+      position:absolute; width:10px; height:10px;
+      background: currentColor; transform: rotate(45deg);
+      border-radius:2px;
+      animation: pop .7s ease-out forwards;
+      filter: drop-shadow(0 0 8px rgba(255,160,200,.45));
+    }
+    @keyframes pop{
+      0%{ transform: translate(0,0) scale(.6) rotate(45deg); opacity:1 }
+      100%{ transform: translate(var(--tx), var(--ty)) scale(1.1) rotate(45deg); opacity:0 }
+    }
+
+    footer{
+      margin-top:18px;
+      text-align:center;
+      font-size:12px;
+      color:#8f96ad;
+      opacity:.8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Nền tim bay -->
+  <div class="heart-field" id="heartField" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <h1 class="title">Chúc mừng Ngày Phụ Nữ Việt Nam 20/10 💕</h1>
+      <p class="subtitle">Gửi đến tất cả những bông hoa xinh đẹp — luôn rực rỡ, hạnh phúc và được yêu thương mỗi ngày!</p>
+
+      <div class="typewriter" id="tw">
+        <span id="twText"></span><span class="cursor" aria-hidden="true"></span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="moreHearts">Thêm trái tim 💗</button>
+        <div class="chip" id="popLove"><span class="bump">💖</span> Yêu thương nhiều hơn</div>
+        <div class="chip" id="popJoy"><span class="bump">💞</span> Niềm vui trọn vẹn</div>
+        <div class="chip" id="popLuck"><span class="bump">💝</span> May mắn ngập tràn</div>
+      </div>
+
+      <footer>Made with 💗 — 20/10</footer>
+    </div>
+  </div>
+
+  <div class="burst" id="burst"></div>
+
+  <script>
+    /* ====== Typewriter ====== */
+    const messageLines = [
+      "Chúc các bạn nữ 20/10 thật VUI VẺ 🌸",
+      "Luôn XINH ĐẸP, TỰ TIN và TỎA SÁNG ✨",
+      "Mỗi ngày đều được YÊU THƯƠNG như hôm nay 💗"
+    ];
+    const twText = document.getElementById('twText');
+    let line = 0, char = 0, deleting = false;
+
+    function typeLoop(){
+      const current = messageLines[line];
+      if(!deleting){
+        twText.textContent = current.slice(0, ++char);
+        if(char === current.length){
+          deleting = true;
+          setTimeout(typeLoop, 1400);
+          return;
+        }
+        setTimeout(typeLoop, 42 + Math.random()*60);
+      }else{
+        twText.textContent = current.slice(0, --char);
+        if(char === 0){
+          deleting = false;
+          line = (line + 1) % messageLines.length;
+        }
+        setTimeout(typeLoop, 26 + Math.random()*40);
+      }
+    }
+    typeLoop();
+
+    /* ====== Hearts background ====== */
+    const heartField = document.getElementById('heartField');
+    const colors = ["#ff4d6d","#ff7aa2","#ff9bd1","#ffd1e8","#ff4d6d"];
+    function spawnHeart(x=null, baseY=null){
+      const h = document.createElement('div');
+      h.className='heart';
+      const size = 10 + Math.random()*18;
+      h.style.width = h.style.height = size+'px';
+      h.style.left = (x ?? Math.random()*100)+'vw';
+      h.style.bottom = (baseY ?? -20) + 'px';
+      h.style.color = colors[Math.floor(Math.random()*colors.length)];
+      const dur = 6 + Math.random()*6;
+      h.style.animationDuration = dur+'s';
+      h.style.opacity = 0;
+      heartField.appendChild(h);
+      // trigger repaint to apply animation
+      getComputedStyle(h).opacity;
+      h.style.opacity = 1;
+      setTimeout(()=> h.remove(), dur*1000);
+    }
+    // mưa tim nhẹ nhàng
+    setInterval(()=>{ for(let i=0;i<3;i++) spawnHeart() }, 800);
+
+    // click/tap tạo tim tại vị trí chạm
+    document.addEventListener('pointerdown', (e)=>{
+      const vw = (e.clientX / innerWidth) * 100;
+      spawnHeart(vw, -10);
+      pop(e.clientX, e.clientY);
+    });
+
+    // nút thêm tim
+    document.getElementById('moreHearts').addEventListener('click', ()=>{
+      for(let i=0;i<24;i++){
+        setTimeout(()=> spawnHeart(), i*60);
+      }
+    });
+
+    /* ====== Heart confetti burst ====== */
+    const burst = document.getElementById('burst');
+    function pop(x, y){
+      const n = 18;
+      for(let i=0;i<n;i++){
+        const p = document.createElement('div');
+        p.className='particle';
+        const a = (Math.PI*2) * (i/n);
+        const r = 60 + Math.random()*80;
+        p.style.left = (x - 5) + 'px';
+        p.style.top  = (y - 5) + 'px';
+        p.style.setProperty('--tx',  Math.cos(a)*r + 'px');
+        p.style.setProperty('--ty',  Math.sin(a)*r + 'px');
+        p.style.color = colors[i % colors.length];
+        burst.appendChild(p);
+        setTimeout(()=> p.remove(), 900);
+      }
+    }
+    // chip “nổ tim”
+    const bindBurst = id => document.getElementById(id).addEventListener('click', (e)=>{
+      const rect = e.currentTarget.getBoundingClientRect();
+      pop(rect.left + rect.width/2, rect.top + rect.height/2);
+    });
+    bindBurst('popLove'); bindBurst('popJoy'); bindBurst('popLuck');
+  </script>
+</body>
+</html>
